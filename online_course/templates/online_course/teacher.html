@@ -1,0 +1,54 @@
+{% extends 'online_course/base/base.html' %}
+{% load static %}
+{% block teachers %}
+    <!-- Header Start -->
+    <div class="container-fluid page-header bg-dark-overlay" style="margin-bottom: 90px;">
+        <div class="container">
+            <div class="d-flex flex-column justify-content-center align-items-center text-center" style="min-height: 300px;">
+                <h3 class="display-4 text-white text-uppercase mb-3">Teachers</h3>
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb d-inline-flex bg-transparent text-white">
+                        <li class="breadcrumb-item"><a class="text-white" href="#">Home</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Teachers</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+    </div>
+    <!-- Header End -->
+
+    <!-- Teachers Section Start -->
+    <section class="team-section py-5">
+        <div class="container pt-5 pb-3">
+            <div class="text-center mb-5">
+                <h5 class="text-primary text-uppercase mb-3" style="letter-spacing: 5px;">Our Educators</h5>
+                <h1 class="mb-4">Meet Our Professional Teachers</h1>
+                <p class="mb-0">Our teachers are skilled, dedicated, and passionate about helping students achieve their goals.</p>
+            </div>
+            <div class="row g-4">
+                {% for teacher in teachers %}
+                    <div class="col-md-6 col-lg-4 text-center">
+                        <div class="team-item shadow-sm rounded overflow-hidden">
+                            <div class="team-img position-relative">
+                                <img class="img-fluid w-100" src="{{ teacher.image.url }}" alt="{{ teacher.full_name }}">
+                                <div class="team-social position-absolute top-50 start-50 translate-middle d-flex justify-content-center align-items-center">
+                                    <a class="btn btn-outline-light btn-square mx-1" href="{{ teacher.instagram_url }}"><i class="fab fa-instagram"></i></a>
+                                    <a class="btn btn-outline-light btn-square mx-1" href="{{ teacher.telegram_url }}"><i class="fab fa-telegram"></i></a>
+                                </div>
+                            </div>
+                            <div class="bg-secondary p-4">
+                                <h5 class="text-uppercase">{{ teacher.full_name }}</h5>
+                                <ul class="list-unstyled text-muted">
+                                    {% for course in teacher.courses.all %}
+                                        <li><i class="fa fa-check text-primary me-2"></i>{{ course.name }}</li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+    <!-- Teachers Section End -->
+{% endblock %}
